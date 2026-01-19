@@ -21,7 +21,7 @@ export class Product {
     @UpdateDateColumn()
     createdAt: Date;
 
-    // @ManyToOne(() => Category, (category) => category.product, { onDelete: 'CASCADE' })
-    // category: Category;
+    @ManyToOne(() => Category, (category) => category.products, { onDelete: 'CASCADE' })
+    category: Category;
 
 }

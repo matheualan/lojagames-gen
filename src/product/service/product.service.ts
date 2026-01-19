@@ -16,9 +16,9 @@ export class ProductService {
 
     async findAll(): Promise<Product[]> {
         return await this.productRepository.find({
-            // relations: {
-            //     category: true
-            // }
+            relations: {
+                category: true
+            }
         });
     }
 
@@ -27,9 +27,9 @@ export class ProductService {
             where: {
                 id
             },
-            // relations: {
-            //     category: true
-            // }
+            relations: {
+                category: true
+            }
         });
 
         if (!product) throw new HttpException('Produto nao encontrado', HttpStatus.NOT_FOUND);
@@ -42,20 +42,20 @@ export class ProductService {
             where: {
                 name: ILike(`%${name}%`)
             },
-            // relations: {
-            //     category: true
-            // }
+            relations: {
+                category: true
+            }
         });
     }
 
     async create(product: Product): Promise<Product> {
-        // this.categoryService.findById(product.category.id);
+        this.categoryService.findById(product.category.id);
         return await this.productRepository.save(product);
     }
 
     async update(product: Product): Promise<Product> {
         await this.findById(product.id);
-        // await this.categoryService.findById(product.category.id);
+        await this.categoryService.findById(product.category.id);
         return await this.productRepository.save(product);
     }
 

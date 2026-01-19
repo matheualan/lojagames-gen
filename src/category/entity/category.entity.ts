@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "../../product/entity/product.entity";
 
 @Entity({ name: "tb_categories" })
 export class Category {
@@ -12,7 +13,7 @@ export class Category {
     @Column({ length: 255 })
     description: string;
 
-    // @OneToMany(() => Product, (product) => product.category)
-    // products: Product[];
+    @OneToMany(() => Product, (product) => product.category)
+    products: Product[];
 
 }
