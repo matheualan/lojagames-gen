@@ -13,7 +13,7 @@ import { Category } from './category/entity/category.entity';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'db_loja_games',
+      database: 'db_game_store',
       entities: [Category],
       synchronize: true
     }),
