@@ -1,8 +1,8 @@
-import { Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { CategoryService } from "../service/categoria.service";
 import { Category } from "../entity/category.entity";
 
-@Controller()
+@Controller('/categories')
 export class CategoryController {
 
     constructor(private readonly categoryService: CategoryService) { }
@@ -25,6 +25,22 @@ export class CategoryController {
         return this.categoryService.findAllByName(name);
     }
 
-    
-     
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    create(@Body() category: Category): Promise<Category> {
+        return this.categoryService.create(category);
+    }
+
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    update(@Body() category: Category): Promise<Category> {
+        return this.categoryService.update(category);
+    }
+
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete(@Param('id', ParseIntPipe) id: number) {
+        return this.categoryService.delete(id);
+    }
+      
 }
